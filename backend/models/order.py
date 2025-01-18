@@ -48,7 +48,11 @@ class Order(Base):
 
     # Relationships
     client = relationship("Client", back_populates="orders")
-    address_history = relationship("AddressHistory", back_populates="order")
+    address_history = relationship(
+        "AddressHistory",
+        back_populates="orders",
+        foreign_keys=[address_history_id]  # Specify the foreign key explicitly
+    )
     restaurant_employee = relationship(
         "RestaurantEmployee",
         secondary="restaurant_employee_order",

@@ -15,11 +15,13 @@ class AddressHistory(Base):
     floor = Column(Integer, nullable=True)
     staircase = Column(String, nullable=True)
     client_id = Column(Integer, ForeignKey("client.id", ondelete="CASCADE"), nullable=False)  # Client required
-    order_id = Column(Integer, ForeignKey("order.id", ondelete="SET NULL"), nullable=True)  # Optional link to Order
 
     # Relationships
     client = relationship("Client", back_populates="address_history")
-    order = relationship("Order", back_populates="address_history")
+    orders = relationship(
+        "Order",
+        back_populates="address_history",
+    )
 
 # Validation to ensure AddressHistory has a client
 def validate_address_history_client(mapper, connection, target):
