@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 from sqlalchemy.orm import sessionmaker
+from contextlib import contextmanager
 
 # Database configuration
 DATABASE_URL = "sqlite:///./database.db"
@@ -12,6 +13,14 @@ engine = create_engine(
 
 # Session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Dependency to get the database session
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 # Base model
 @as_declarative()
