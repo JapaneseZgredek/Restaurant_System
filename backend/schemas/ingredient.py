@@ -33,7 +33,7 @@ class IngredientWithRelations(Ingredient):
     deliveries: List["Delivery"] = []
 
 
-# Import related schemas
+# Import related schemas to resolve circular references
 from backend.schemas.dish import Dish
 from backend.schemas.delivery import Delivery
 

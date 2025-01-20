@@ -24,14 +24,14 @@ class Dish(Base):
     # Relationships
     orders = relationship(
         "Order",
-        secondary="order_dish",  # Use the association table defined in order.py
+        secondary="order_dish",
         back_populates="dishes"
     )  # Many-to-many with Order
     ingredients = relationship(
         "Ingredient",
         secondary=dish_ingredient,
         back_populates="dishes",
-        cascade="all, delete"  # Ensures cascading deletes in composition
+        cascade="all, delete"  # Composition
     )
 
 # Validation to ensure a dish has at least 2 ingredients

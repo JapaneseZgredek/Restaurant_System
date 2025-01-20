@@ -30,6 +30,7 @@ class DeliveryWithRelations(Delivery):
     ingredients: List["Ingredient"] = []
 
 
+# Import related schemas to resolve circular references
 from backend.schemas.deliver import Deliver
 from backend.schemas.ingredient import Ingredient
 

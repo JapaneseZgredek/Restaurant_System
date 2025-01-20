@@ -56,7 +56,7 @@ class OrderWithRelations(Order):
     dishes: List["Dish"] = []
 
 
-# Import related schemas
+# Import related schemas to resolve circular references
 from backend.schemas.client import Client
 from backend.schemas.address_history import AddressHistory
 from backend.schemas.restaurant_employee import RestaurantEmployee

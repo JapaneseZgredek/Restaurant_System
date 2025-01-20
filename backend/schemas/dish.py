@@ -36,7 +36,7 @@ class DishWithRelations(Dish):
     ingredients: List["Ingredient"] = []
 
 
-# Import related schemas
+# Import related schemas to resolve circular references
 from backend.schemas.ingredient import Ingredient
 
 DishWithRelations.update_forward_refs()

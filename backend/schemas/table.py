@@ -32,7 +32,7 @@ class TableWithRelations(Table):
     reservation: Optional["Reservation"] = None
 
 
-# Import related schemas
+# Import related schemas to resolve circular references
 from backend.schemas.reservation import Reservation
 
 TableWithRelations.update_forward_refs()

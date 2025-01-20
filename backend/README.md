@@ -1,38 +1,79 @@
-Walidacja w aplikacji
-Walidacja podczas tworzenia rezerwacji: W momencie tworzenia nowej rezerwacji, należy sprawdzić, czy przekazano przynajmniej jeden Table:
-python
-Skopiuj kod
-def create_reservation(session, reservation_data, table_ids):
-    if not table_ids or len(table_ids) < 1:
-        raise ValueError("Reservation must include at least one table.")
-    
-    # Pobierz stoliki z bazy danych
-    tables = session.query(Table).filter(Table.id.in_(table_ids)).all()
+#  Restaurant System - FastAPI & React Application
 
-    if len(tables) != len(table_ids):
-        raise ValueError("One or more tables do not exist.")
+This project is a full-stack application built using **FastAPI** (backend), **React** (frontend), and **SQLite** (database). Follow the steps below to set up and run the application on a new machine.
 
-    # Sprawdź, czy stoliki nie są już przypisane do innych rezerwacji
-    for table in tables:
-        if table.reservation_id is not None:
-            raise ValueError(f"Table {table.number} is already reserved.")
+---
 
-    # Utwórz rezerwację i przypisz stoliki
-    reservation = Reservation(**reservation_data)
-    reservation.tables = tables
+## Prerequisites
 
-    session.add(reservation)
-    session.commit()
+Ensure you have the following installed on your machine:
+- Python 3.8 or later
+- Node.js and npm (for managing the React frontend)
+- Git (for cloning the repository)
 
+---
 
-Przykład użycia w FastAPI
-python
-Skopiuj kod
-@app.post("/reservations/")
-def create_reservation_endpoint(reservation: ReservationSchema, table_ids: List[int], db: Session = Depends(get_db)):
-    try:
-        create_reservation(db, reservation.dict(), table_ids)
-        return {"message": "Reservation created successfully"}
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+## Setup Instructions
 
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd <repository-folder>
+```
+
+### 2. Backend Setup (FastAPI)
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Start the FastAPI server:
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+   The server will be available at: `http://127.0.0.1:8000`
+
+---
+
+### 3. Frontend Setup (React)
+1. Navigate to the frontend directory:
+   ```bash
+   cd ../frontend
+   ```
+
+2. Install the required npm packages:
+   ```bash
+   npm install
+   ```
+
+3. Start the React development server:
+   ```bash
+   npm start
+   ```
+
+   The frontend will be available at: `http://localhost:3000`
+
+---
+
+## Accessing the Application
+1. **Frontend**: Open your browser and navigate to `http://localhost:3000`.
+2. **API Docs**: Visit the FastAPI interactive documentation at `http://127.0.0.1:8000/docs`.
+
+---
+
+## Troubleshooting
+- Ensure the backend server (`uvicorn`) is running before starting the frontend.
+- Check your database connection if there are issues with data retrieval.
+- Run `npm audit fix` in the frontend directory to resolve dependency warnings.

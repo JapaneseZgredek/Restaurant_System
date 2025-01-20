@@ -6,7 +6,6 @@ from sqlalchemy import event
 from sqlalchemy.exc import IntegrityError
 from enum import Enum as PyEnum
 
-# Enum for positions
 class Position(PyEnum):
     waiter = "waiter"
     cook = "cook"
@@ -17,7 +16,7 @@ class EmploymentContract(Base):
     __tablename__ = "employment_contract"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    start_date = Column(Date, default=datetime.utcnow, nullable=False)
+    start_date = Column(Date, default=datetime.now, nullable=False)
     end_date = Column(Date, nullable=True)
     salary = Column(Float, nullable=False)
     position = Column(Enum(Position), nullable=False)

@@ -5,7 +5,6 @@ from sqlalchemy import event
 from sqlalchemy.exc import IntegrityError
 from enum import Enum as PyEnum
 
-# Enums for status, payment, and order type
 class OrderStatus(PyEnum):
     placed = "placed"
     new = "new"
@@ -43,15 +42,15 @@ class Order(Base):
     takeaway_or_onsite = Column(Enum(OrderType), nullable=False)
     note = Column(String, nullable=True)
     delay = Column(Boolean, default=False)
-    client_id = Column(Integer, ForeignKey("client.id", ondelete="CASCADE"), nullable=False)  # Cascade on delete
-    address_history_id = Column(Integer, ForeignKey("address_history.id", ondelete="SET NULL"), nullable=False)
+    client_id = Column(Integer, ForeignKey("client.id", ondelete="CASCADE"), nullable=False)
+    address_history_id = Column(Integer, ForeignKey("address_history.id", ondelete="SET NULL"), nullable=True)
 
     # Relationships
     client = relationship("Client", back_populates="orders")
     address_history = relationship(
         "AddressHistory",
         back_populates="orders",
-        foreign_keys=[address_history_id]  # Specify the foreign key explicitly
+        foreign_keys=[address_history_id]
     )
     restaurant_employee = relationship(
         "RestaurantEmployee",

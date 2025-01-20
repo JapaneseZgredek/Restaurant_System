@@ -3,7 +3,6 @@ from sqlalchemy.orm import relationship
 from backend.core.database import Base
 from enum import Enum as PyEnum
 
-# Enum for measurement units
 class Metric(PyEnum):
     grams = "grams"
     milliliters = "milliliters"
@@ -21,7 +20,7 @@ class Ingredient(Base):
         "Dish",
         secondary="dish_ingredient",
         back_populates="ingredients",
-        cascade="all, delete"  # Ensures cascading deletes for composition
+        cascade="all, delete"  # Composition
     )
     deliveries = relationship(
         "Delivery",
