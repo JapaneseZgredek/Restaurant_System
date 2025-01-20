@@ -39,7 +39,7 @@ class EmploymentContractWithRelations(EmploymentContract):
     restaurant_employee: "RestaurantEmployee"
 
 
-# Import related schemas
+# Import related schemas to resolve circular references
 from backend.schemas.restaurant_employee import RestaurantEmployee
 
 EmploymentContractWithRelations.update_forward_refs()

@@ -1,5 +1,7 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from backend.core.database import get_db
 from backend.models.dish import Dish as DishModel, dish_ingredient
 from backend.models.ingredient import Ingredient as IngredientModel
@@ -82,3 +84,11 @@ def get_dish_with_relations(dish_id: int, db: Session = Depends(get_db)):
     if not dish:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Dish not found")
     return dish
+
+# Get all Dish records with related object, especially ingredients (used to display in Menu)
+@router.get("/dishes/all-with-relations", response_model=List[DishWithRelations])
+def get_all_dish_with_relations(db: Session = Depends(get_db)):
+    dishes = db.query(DishModel).options(joinedload(DishModel.ingredients)).all()
+    if not dishes:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No dishes found")
+    return dishes

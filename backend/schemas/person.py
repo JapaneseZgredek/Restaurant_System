@@ -37,7 +37,7 @@ class PersonWithRelations(Person):
     deliver: Optional["Deliver"] = None
 
 
-# Import related schemas
+# Import related schemas to resolve circular references
 from backend.schemas.restaurant_employee import RestaurantEmployee
 from backend.schemas.client import Client
 from backend.schemas.deliver import Deliver

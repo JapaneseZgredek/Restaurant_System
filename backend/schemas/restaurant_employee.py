@@ -26,17 +26,3 @@ class RestaurantEmployee(BaseModel):
 
     class Config:
         from_attributes = True
-
-# Detailed schema with related objects
-class RestaurantEmployeeWithRelations(RestaurantEmployee):
-    person: "Person"
-    employment_contract: Optional["EmploymentContract"] = None
-    orders: List["Order"] = []
-
-
-# Import related schemas
-from backend.schemas.person import Person
-from backend.schemas.employment_contract import EmploymentContract
-from backend.schemas.order import Order
-
-RestaurantEmployeeWithRelations.update_forward_refs()

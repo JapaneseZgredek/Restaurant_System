@@ -40,7 +40,7 @@ class ReservationWithRelations(Reservation):
     client: "Client"
     tables: List["Table"] = []
 
-# Import related schemas
+# Import related schemas to resolve circular references
 from backend.schemas.client import Client
 from backend.schemas.table import Table
 

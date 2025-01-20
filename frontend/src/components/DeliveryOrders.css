@@ -1,0 +1,101 @@
+.delivery-orders-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #4a90e2;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.order-card {
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+  border: 2px solid #e3e3e3;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.highlight {
+  border-color: #ff4444;
+  box-shadow: 0 0 15px rgba(255, 68, 68, 0.5);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.order-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.order-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-button {
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.action-button:hover {
+  background: linear-gradient(135deg, #218838, #1e7e34);
+  transform: scale(1.05);
+}
+
+.delayed-button {
+  background: linear-gradient(135deg, #ffc107, #ffb507);
+}
+
+.delayed-button:hover {
+  background: linear-gradient(135deg, #ffb507, #ff9800);
+}
+
+.order-details {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.order-items {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.order-items th,
+.order-items td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.order-items th {
+  background-color: #4a90e2;
+  color: white;
+  font-weight: bold;
+}

@@ -29,7 +29,7 @@ class DeliverWithRelations(Deliver):
     deliveries: List["Delivery"] = []
 
 
-# Import related schemas
+# Import related schemas to resolve circular references
 from backend.schemas.delivery import Delivery
 
 DeliverWithRelations.update_forward_refs()

@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from backend.core.database import initialize_database
 from backend.routes.address_history import router as address_history_router
 from backend.routes.client import router as client_router
@@ -20,6 +21,16 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],  # Add allowed frontend origins here
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
+
+# Include routers
 app.include_router(address_history_router)
 app.include_router(client_router)
 app.include_router(deliver_router)

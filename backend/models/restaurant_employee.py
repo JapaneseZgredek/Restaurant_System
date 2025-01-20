@@ -27,7 +27,7 @@ class RestaurantEmployee(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     employee_identificator = Column(String, unique=True, nullable=False)
     role = Column(Enum(Role), nullable=False)
-    person_id = Column(Integer, ForeignKey("person.id", ondelete="CASCADE"), nullable=False)  # Ensure cascade delete
+    person_id = Column(Integer, ForeignKey("person.id", ondelete="CASCADE"), nullable=False)
 
     # Relationships
     person = relationship("Person", back_populates="restaurant_employee")

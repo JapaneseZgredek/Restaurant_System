@@ -43,12 +43,12 @@ class AddressHistory(BaseModel):
 
 # Schema for retrieving AddressHistory with related objects
 class AddressHistoryWithRelations(AddressHistory):
-    client: Optional["Client"] = None  # Will include client information
-    order: Optional["Order"] = None   # Will include order information
+    client: Optional["Client"] = None
+    order: Optional["Order"] = None
 
 
 # Import-related schemas to resolve circular imports
-from backend.schemas.client import Client  # Adjust path to match your project structure
-from backend.schemas.order import Order    # Adjust path to match your project structure
+from backend.schemas.client import Client
+from backend.schemas.order import Order
 
 AddressHistoryWithRelations.update_forward_refs()
